@@ -15,6 +15,7 @@
 	const firstLayerlColor = 'bg-purple-200';
 	const secondLayerColor = 'bg-indigo-200';
 	const outputColor = 'bg-blue-200';
+	const queryHeadVectorColor = 'bg-purple-400';
 
 	let isHovered = false;
 
@@ -78,7 +79,7 @@
 						<div class={`vector flex flex-col  ${firstLayerlColor}`}>
 							<VectorCanvas colorScale="purple" active={vectorHoverIdx === index} />
 							<div
-								class="sub-vector x1-12 head1 absolute"
+								class={`sub-vector x1-12 head1 ${queryHeadVectorColor} absolute`}
 								bind:this={headCursors[`token${index}_out`]}
 							></div>
 							<div class="sub-vector head-rest grow"></div>

@@ -7,13 +7,14 @@ Transformer Explainer is an interactive visualization tool designed to help anyo
 <a href="https://youtu.be/TFUc41G2ikY" target="_blank"><img width="100%" src='https://github.com/user-attachments/assets/0a4d8888-6555-4df5-bc71-77f1299115c3'></a>
 
 ## Live Demo
+
 Try Transformer Explainer: http://poloclub.github.io/transformer-explainer
 
 ## Research Paper
 
-[**Transformer Explainer: Interactive Learning of Text-Generative Models**](https://arxiv.org/abs/2408.04619).
-Aeree Cho, Grace C. Kim, Alexander Karpekov, Alec Helbling, Zijie J. Wang, Seongmin Lee, Benjamin Hoover, Duen Horng Chau.
-_Poster, IEEE VIS 2024._
+[**Transformer Explainer: Learning LLM Transformers with Interactive Visual Explanation and Experimentations**](https://dl.acm.org/doi/pdf/10.1145/3772318.3791725).
+Aeree Cho, Grace C. Kim, Alexander Karpekov, Seongmin Lee, Alec Helbling, Benjamin Hoover, Zijie J. Wang, Minsuk Kahng, Duen Horng Chau.
+_Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems._
 
 ## How to run locally
 
@@ -40,12 +41,12 @@ Transformer Explainer was created by <a href="https://aereeeee.github.io/" targe
 ## Citation
 
 ```bibTeX
-@article{cho2024transformer,
-  title = {Transformer Explainer: Interactive Learning of Text-Generative Models},
-  shorttitle = {Transformer Explainer},
-  author = {Cho, Aeree and Kim, Grace C. and Karpekov, Alexander and Helbling, Alec and Wang, Zijie J. and Lee, Seongmin and Hoover, Benjamin and Chau, Duen Horng},
-  journal={IEEE VIS Poster},
-  year={2024}
+@inproceedings{cho2026transformer,
+  title={Transformer Explainer: Learning LLM Transformers with Interactive Visual Explanation and Experimentation},
+  author={Cho, Aeree and Kim, Grace C and Karpekov, Alexander and Lee, Seongmin and Helbling, Alec and Hoover, Benjamin and Wang, Zijie J and Kahng, Minsuk and Chau, Duen Horng},
+  booktitle={Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems},
+  pages={1--21},
+  year={2026}
 }
 ```
 
