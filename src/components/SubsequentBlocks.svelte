@@ -28,9 +28,9 @@
 				class:active={$blockIdx !== $modelMeta.layer_num - 1}
 			>
 				<div class="text" class:highlight={$isBoundingBoxActive}>
-					<TextbookTooltip id="blocks">
-						<span class="strong">{$modelMeta.layer_num - $blockIdx - 1}</span> more identical<br
-						/><span class="strong">Transformer<br />Blocks</span>
+						<TextbookTooltip id="blocks">
+							<span class="strong">{$modelMeta.layer_num - $blockIdx - 1}</span> 个相同的<br
+							/><span class="strong">Transformer 块</span>
 					</TextbookTooltip>
 				</div>
 

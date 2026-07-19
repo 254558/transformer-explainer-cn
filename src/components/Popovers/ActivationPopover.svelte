@@ -10,16 +10,16 @@
 </script>
 
 <CommonPopover
-	className="activation-popover"
-	title="GELU Activation"
-	{offset}
-	{triggeredBy}
-	{trigger}
-	{placement}
-	goTo="article-activation"
->
-	<div class="activation-content">
-		Applies non-linear transformation to linearly transformed output to learn complex patterns.
+		className="activation-popover"
+		title="GELU 激活函数"
+		{offset}
+		{triggeredBy}
+		{trigger}
+		{placement}
+		goTo="article-activation"
+	>
+		<div class="activation-content">
+			对线性变换后的输出应用非线性变换，以学习复杂模式。
 	</div></CommonPopover
 >
 

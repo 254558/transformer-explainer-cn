@@ -27,13 +27,14 @@ export const isModelRunning = writable(false);
 export const isFetchingModel = writable(true);
 export const isLoaded = writable(false);
 
-export const inputTextExample = [
-	'Data visualization empowers users to',
-	'Artificial Intelligence is transforming the',
-	'As the spaceship was approaching the',
-	'On the deserted planet they discovered a',
-	'IEEE VIS conference highlights the'
-];
+	export const inputTextExample = [
+		'Data visualization empowers users to',
+		'Artificial Intelligence is transforming the',
+		'As the spaceship was approaching the',
+		'On the deserted planet they discovered a',
+		'IEEE VIS conference highlights the'
+	];
+	// 注：示例文本保持英文，因为 GPT-2 模型是英文模型，输入中文无法正常工作
 
 const initialExIdx = 0;
 export const selectedExampleIdx = writable<number>(initialExIdx);

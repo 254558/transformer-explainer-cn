@@ -62,17 +62,17 @@
 					data-click={`textbook-link-${id}`}
 					class="text-blue-600 hover:underline"
 				>
-					Open Textbook
-				</a>
-			</div>
-		{/if}
-		{#if goTo}
-			<div
-				data-click={`read-more-btn-${id}`}
-				class="more-btn mt-1 text-blue-600 hover:underline"
-				on:click={(e) => onClickReadMore(e, goTo, { value: id })}
-			>
-				Read more
+					打开教材
+					</a>
+				</div>
+			{/if}
+			{#if goTo}
+				<div
+					data-click={`read-more-btn-${id}`}
+					class="more-btn mt-1 text-blue-600 hover:underline"
+					on:click={(e) => onClickReadMore(e, goTo, { value: id })}
+				>
+					阅读更多
 			</div>
 		{/if}
 	</div></Popover

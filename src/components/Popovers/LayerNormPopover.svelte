@@ -10,16 +10,16 @@
 </script>
 
 <CommonPopover
-	className="ln-popover"
-	title="Layer Normalization"
-	{offset}
-	{triggeredBy}
-	{trigger}
-	{placement}
-	goTo="article-ln"
->
-	<div class="ln-content">
-		Normalizes layer input to have a standard distribution for stability.
+		className="ln-popover"
+		title="层归一化 (Layer Normalization)"
+		{offset}
+		{triggeredBy}
+		{trigger}
+		{placement}
+		goTo="article-ln"
+	>
+		<div class="ln-content">
+			将层输入归一化为标准分布，以提高稳定性。
 	</div></CommonPopover
 >
 

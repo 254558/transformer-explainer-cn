@@ -210,9 +210,9 @@
 		on:mouseleave={handleMouseLeave}
 		data-click="prob-step-title"
 	>
-		<div class="title-text flex w-max items-center gap-1">
-			Probabilities
-			<ZoomInOutline></ZoomInOutline>
+			<div class="title-text flex w-max items-center gap-1">
+				概率 (Probabilities)
+				<ZoomInOutline></ZoomInOutline>
 		</div>
 	</div>
 
@@ -247,7 +247,7 @@
 			{#if isSoftmaxExpanded}
 				<div class="softmax-subtitle softmax-detail flex text-center text-xs opacity-0">
 					<div class="title-box token-string !justify-end">
-						<div class="title-text">Tokens</div>
+						<div class="title-text">Token</div>
 					</div>
 					<div class="title-box logits">
 						<div
@@ -259,20 +259,20 @@
 						</div>
 					</div>
 					<div class="title-box scaled">
-						<TextbookTooltip id="temperature"
-							><div class="title-text">Scaled logits</div></TextbookTooltip
+							<TextbookTooltip id="temperature"
+								><div class="title-text">缩放后 Logits</div></TextbookTooltip
 						>
 					</div>
 					<div class="title-box sampling">
 						<TextbookTooltip id="sampling"
 							><div class="title-text">
 								{$sampling.type === 'top-k' ? 'Top-k' : 'Softmax & Top-p'}
-							</div></TextbookTooltip
-						>
-					</div>
-					<div class="title-box probability">
-						<div class="title-text mr-1">
-							{$sampling.type === 'top-k' ? 'Softmax' : 'Normalization'}
+								</div></TextbookTooltip
+							>
+						</div>
+						<div class="title-box probability">
+							<div class="title-text mr-1">
+								{$sampling.type === 'top-k' ? 'Softmax' : '归一化'}
 						</div>
 					</div>
 				</div>

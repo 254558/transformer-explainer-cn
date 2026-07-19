@@ -10,16 +10,16 @@
 </script>
 
 <CommonPopover
-	className="dropout-popover"
-	title="Dropout"
-	{offset}
-	{triggeredBy}
-	{trigger}
-	{placement}
-	goTo="article-dropout"
->
-	<div class="dropout-content">
-		Disables randomly selected neurons. Used only during training.
+		className="dropout-popover"
+		title="丢弃 (Dropout)"
+		{offset}
+		{triggeredBy}
+		{trigger}
+		{placement}
+		goTo="article-dropout"
+	>
+		<div class="dropout-content">
+			随机禁用部分神经元。仅在训练时使用。
 	</div></CommonPopover
 >
 

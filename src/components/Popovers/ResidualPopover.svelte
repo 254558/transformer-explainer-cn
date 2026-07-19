@@ -11,17 +11,17 @@
 </script>
 
 <CommonPopover
-	className="residual-popover"
-	title="Residual Connection"
-	{offset}
-	{triggeredBy}
-	{trigger}
-	{placement}
-	{reference}
-	goTo="article-residual"
->
-	<div class="residual-content">
-		Adds layer input to output to help preserve information.
+		className="residual-popover"
+		title="残差连接 (Residual Connection)"
+		{offset}
+		{triggeredBy}
+		{trigger}
+		{placement}
+		{reference}
+		goTo="article-residual"
+	>
+		<div class="residual-content">
+			将层的输入与输出相加，有助于保留信息。
 	</div></CommonPopover
 >
 

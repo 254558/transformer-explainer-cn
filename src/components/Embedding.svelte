@@ -173,9 +173,9 @@
 		on:mouseleave={handleMouseLeave}
 		data-click="embedding-step-title"
 	>
-		<div class="title-text flex w-max items-center gap-1">
-			Embedding
-			<ZoomInOutline></ZoomInOutline>
+			<div class="title-text flex w-max items-center gap-1">
+				嵌入层 (Embedding)
+				<ZoomInOutline></ZoomInOutline>
 		</div>
 	</div>
 	<div class="content relative">
@@ -184,7 +184,7 @@
 			<!-- token -->
 			<div class="column token-string relative">
 				{#if isEmbeddingExpanded}<div class="subtitle embedding-detail">
-						<TextbookTooltip id="token-embedding">Tokenization</TextbookTooltip>
+							<TextbookTooltip id="token-embedding">分词 (Tokenization)</TextbookTooltip>
 					</div>{/if}
 				{#each $tokens as token, index}
 					<div class="cell" class:last={index === $tokens.length - 1}>
@@ -196,7 +196,7 @@
 				<!-- token id and embedding -->
 				<div class="column token-embedding embedding-detail">
 					<div class="subtitle flex items-center gap-1">
-						<TextbookTooltip id="token-embedding"><span>Token<br />Embedding</span></TextbookTooltip
+							<TextbookTooltip id="token-embedding"><span>Token<br />嵌入</span></TextbookTooltip
 						>
 						<!-- <HelpPopover
 							id="token-embedding"
@@ -226,9 +226,9 @@
 									<VectorCanvas active />
 								</div>
 								<span class="index-val text-xs">
-									{#if index === 0}
-										<span class="label">id</span><br />
-									{/if}
+										{#if index === 0}
+											<span class="label">编号</span><br />
+										{/if}
 									<span class="val">{$tokenIds[index]}</span>
 								</span>
 							</div>
@@ -243,9 +243,9 @@
 				</div>
 				<div class="column embedding-detail position-embedding">
 					<div class="subtitle flex gap-1">
-						<TextbookTooltip id="positional-encoding">
-							<span>Positional<br />Encoding</span>
-						</TextbookTooltip>
+							<TextbookTooltip id="positional-encoding">
+								<span>位置<br />编码</span>
+							</TextbookTooltip>
 						<!-- <HelpPopover
 							id="position-embedding"
 							goTo="article-positional-embedding"
@@ -266,8 +266,8 @@
 								/>
 							</div>
 							<span class="index-val text-xs">
-								{#if index === 0}
-									<span class="label">position</span><br />
+										{#if index === 0}
+										<span class="label">位置</span><br />
 								{/if}
 								<span class="val">{index}</span>
 							</span>

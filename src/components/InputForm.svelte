@@ -147,7 +147,7 @@
 				class:selectDisabled
 				class="select-button inline-flex shrink-0 items-center justify-center border border-s-0 border-gray-200 bg-white px-3 py-2 text-center text-xs font-medium text-gray-900 first:rounded-s-lg first:border-s last:rounded-e-lg"
 			>
-				Examples<ChevronDownOutline class="pointer-events-none h-4 w-4 text-gray-500" />
+				示例<ChevronDownOutline class="pointer-events-none h-4 w-4 text-gray-500" />
 			</button>
 			<Dropdown bind:open={dropdownOpen} class="example-dropdown">
 				{#each inputTextExample as text, index}
@@ -180,7 +180,7 @@
 						bind:this={inputRef}
 						contenteditable={!disabled}
 						class="text-box"
-						placeholder="Test your own input text"
+							placeholder="输入你自己的文本"
 						on:focus={onFocusInput}
 						on:input={onInput}
 						on:keydown={handleKeyDown}
@@ -211,15 +211,15 @@
 					<div class="loading"><LoadingDots /></div>
 				{/if}
 				{#if $isMobile}
-					<span class="helper-text"
-						>Try the examples. Please use a desktop computer to input GPT-2 prompts directly.</span
-					>
-				{:else if $isLoaded && $isFetchingModel}
-					<span class="helper-text"
-						>Try the examples while GPT-2 model is being downloaded (600MB)</span
-					>
-				{:else if exceedLimit}
-					<span class="helper-text">You can enter up to {wordLimit} words.</span>
+						<span class="helper-text"
+							>请在桌面端使用，手机端暂不支持直接输入文本。</span
+						>
+					{:else if $isLoaded && $isFetchingModel}
+						<span class="helper-text"
+							>GPT-2 模型正在下载（约 600MB），可先使用示例文本体验。</span
+						>
+					{:else if exceedLimit}
+						<span class="helper-text">最多可输入 {wordLimit} 个词。</span>
 				{/if}
 			</div>
 		</ButtonGroup>
@@ -233,8 +233,8 @@
 			type="submit"
 			on:click={handleSubmit}
 		>
-			Generate
-		</button>
+				生成
+			</button>
 	</form>
 	<div class="parameters" data-click="input-parameters">
 		<Temperature disabled={parameterDisabled} />

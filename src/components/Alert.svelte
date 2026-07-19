@@ -13,14 +13,14 @@
 	<div transition:fade>
 		<Alert color="blue" dismissable>
 			<div class="alert-content">
-				We collect anonymous data for research.
-				<a
-					href="./consent-form.pdf"
-					class="font-semibold underline hover:text-blue-800 dark:hover:text-blue-900"
-					target="_blank"
-				>
-					Learn more
-				</a>
+				我们收集匿名数据进行研究。
+					<a
+						href="./consent-form.pdf"
+						class="font-semibold underline hover:text-blue-800 dark:hover:text-blue-900"
+						target="_blank"
+					>
+						了解更多
+					</a>
 			</div>
 		</Alert>
 	</div>

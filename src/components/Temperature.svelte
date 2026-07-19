@@ -33,8 +33,8 @@
 		}}
 	>
 		<div class="temperature-text flex items-center gap-[2px]">
-			<TextbookTooltip id="temperature">
-				<div>Temperature</div></TextbookTooltip
+				<TextbookTooltip id="temperature">
+					<div>温度 (Temperature)</div></TextbookTooltip
 			>
 			<!-- <HelpPopover id="temperature-help"  goTo="article-temperature">
 				{`Changes output \nprobability distribution \nand randomness \nof next token.`}
