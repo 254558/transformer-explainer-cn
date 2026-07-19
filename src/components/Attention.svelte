@@ -70,77 +70,77 @@
 					style={`height:${$headContentHeight}px;`}
 				>
 					<div class="qkv flex h-full flex-col justify-center gap-[5rem] pl-[6rem]">
-						<div class="column key">
-							<div class="head1 title"><TextbookTooltip id="qkv">键</TextbookTooltip></div>
-
+							<div class="column key">
+								<div class="head1 title"><TextbookTooltip id="qkv">K</TextbookTooltip></div>
+	
+									{#each $tokens as token, index}
+										<div
+											class="head1 key cell x1-12 text-xs"
+											class:last={index === $tokens.length - 1}
+											class:active={$hoveredMatrixCell.col === index}
+										>
+											<span class="label float">{token}</span>
+											<div class={`vector x1-12 ${keyHeadVectorColor}`}></div>
+										</div>
+									{/each}
+										<Tooltip class="popover" triggeredBy={'.step.attention .key .cell'} placement="right"
+											>K, 头 {$attentionHeadIdx + 1}, 向量({$modelMeta.dimension /
+												$modelMeta.attention_head_num})</Tooltip
+									>
+							</div>
+								<div class="column query">
+									<div class="head1 title"><TextbookTooltip id="qkv">Q</TextbookTooltip></div>
 								{#each $tokens as token, index}
 									<div
-										class="head1 key cell x1-12 text-xs"
+										class="head1 cell x1-12 query text-xs"
 										class:last={index === $tokens.length - 1}
-										class:active={$hoveredMatrixCell.col === index}
+										class:active={$hoveredMatrixCell.row === index}
 									>
 										<span class="label float">{token}</span>
-										<div class={`vector x1-12 ${keyHeadVectorColor}`}></div>
+										<div class={`vector x1-12  ${queryHeadVectorColor}`}></div>
 									</div>
 								{/each}
-									<Tooltip class="popover" triggeredBy={'.step.attention .key .cell'} placement="right"
-										>键, 头 {$attentionHeadIdx + 1}, 向量({$modelMeta.dimension /
+									<Tooltip
+										class="popover"
+										triggeredBy={'.step.attention .query .cell'}
+										placement="right"
+										>Q, 头 {$attentionHeadIdx + 1}, 向量({$modelMeta.dimension /
 											$modelMeta.attention_head_num})</Tooltip
-								>
-							</div>
-							<div class="column query">
-								<div class="head1 title"><TextbookTooltip id="qkv">查询</TextbookTooltip></div>
-							{#each $tokens as token, index}
-								<div
-									class="head1 cell x1-12 query text-xs"
-									class:last={index === $tokens.length - 1}
-									class:active={$hoveredMatrixCell.row === index}
-								>
-									<span class="label float">{token}</span>
-									<div class={`vector x1-12  ${queryHeadVectorColor}`}></div>
-								</div>
-							{/each}
-								<Tooltip
-									class="popover"
-									triggeredBy={'.step.attention .query .cell'}
-									placement="right"
-									>查询, 头 {$attentionHeadIdx + 1}, 向量({$modelMeta.dimension /
-										$modelMeta.attention_head_num})</Tooltip
 							>
 						</div>
-						<div class="column value">
-							<div class="head1 title"><TextbookTooltip id="qkv">值</TextbookTooltip></div>
-							{#each $tokens as token, index}
-								<div class="head1 cell x1-12 text-xs" class:last={index === $tokens.length - 1}>
-									<span class="label float">{token}</span>
-									<div class={`vector x1-12 ${valHeadVectorColor}`}></div>
-								</div>
-							{/each}
-								<Tooltip
-									class="popover"
-									triggeredBy={'.step.attention .value .cell'}
-									placement="right"
-									>值, 头 {$attentionHeadIdx + 1}, 向量({$modelMeta.dimension /
-										$modelMeta.attention_head_num})</Tooltip
+							<div class="column value">
+								<div class="head1 title"><TextbookTooltip id="qkv">V</TextbookTooltip></div>
+								{#each $tokens as token, index}
+									<div class="head1 cell x1-12 text-xs" class:last={index === $tokens.length - 1}>
+										<span class="label float">{token}</span>
+										<div class={`vector x1-12 ${valHeadVectorColor}`}></div>
+									</div>
+								{/each}
+									<Tooltip
+										class="popover"
+										triggeredBy={'.step.attention .value .cell'}
+										placement="right"
+										>V, 头 {$attentionHeadIdx + 1}, 向量({$modelMeta.dimension /
+											$modelMeta.attention_head_num})</Tooltip
 							>
 						</div>
 					</div>
 					<div class="resize-watch attention-matrix flex">
 						<AttentionMatrix />
 					</div>
-					<div class="head-out mx-[2rem]">
-						<div class="column out">
-							<div class="head1 title">
-									<TextbookTooltip id="output-concatenation">输出</TextbookTooltip>
-							</div>
-							{#each $tokens as token, index}
-								<div class="head1 cell x1-12" class:last={index === $tokens.length - 1}>
-									<div class={`vector x1-12 ${outputVectorColor}`}></div>
+						<div class="head-out mx-[2rem]">
+							<div class="column out">
+								<div class="head1 title">
+										<TextbookTooltip id="output-concatenation">Out</TextbookTooltip>
 								</div>
-							{/each}
-								<Tooltip class="popover" triggeredBy={'.step.attention .out .cell'} placement="right"
-									>注意力输出, 头 1, 向量({$modelMeta.dimension /
-										$modelMeta.attention_head_num})</Tooltip
+								{#each $tokens as token, index}
+									<div class="head1 cell x1-12" class:last={index === $tokens.length - 1}>
+										<div class={`vector x1-12 ${outputVectorColor}`}></div>
+									</div>
+								{/each}
+									<Tooltip class="popover" triggeredBy={'.step.attention .out .cell'} placement="right"
+										>Out, 头 1, 向量({$modelMeta.dimension /
+											$modelMeta.attention_head_num})</Tooltip
 							>
 						</div>
 					</div>
