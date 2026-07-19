@@ -55,7 +55,7 @@
 		data-click="mlp-step-title"
 	>
 		<div class="w-max">
-				<TextbookTooltip id="mlp">MLP（多层感知机）</TextbookTooltip>
+				<TextbookTooltip id="mlp">多层感知机</TextbookTooltip>
 		</div>
 	</div>
 
@@ -87,8 +87,8 @@
 					</div>
 				{/each}
 			</div>
-			<Tooltip triggeredBy={'.step.mlp .initial .cell'} class="popover" placement="right">
-				vector({$modelMeta.dimension})</Tooltip
+				<Tooltip triggeredBy={'.step.mlp .initial .cell'} class="popover" placement="right">
+					向量({$modelMeta.dimension})</Tooltip
 			>
 			<OperationGroup type="dropout" id={'mlp-first-dropout'} />
 			<OperationGroup type="residual-end" id={'embedding-residual'} />
@@ -109,8 +109,8 @@
 				{/each}
 			</div>
 		</div>
-		<Tooltip triggeredBy={'.step.mlp .mlp-mid-column .cell'} class="popover" placement="right">
-			vector({$modelMeta.dimension * 4})</Tooltip
+			<Tooltip triggeredBy={'.step.mlp .mlp-mid-column .cell'} class="popover" placement="right">
+				向量({$modelMeta.dimension * 4})</Tooltip
 		>
 		<div class="layer mlpDown out-layer relative flex justify-between">
 			<div class="activation">
@@ -140,8 +140,8 @@
 						</div>
 					{/each}
 				</div>
-				<Tooltip triggeredBy={'.step.mlp .mlp-out-column .cell'} class="popover" placement="right">
-					vector({$modelMeta.dimension})</Tooltip
+					<Tooltip triggeredBy={'.step.mlp .mlp-out-column .cell'} class="popover" placement="right">
+						向量({$modelMeta.dimension})</Tooltip
 				>
 			</div>
 		</div>

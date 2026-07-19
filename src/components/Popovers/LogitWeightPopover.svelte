@@ -317,13 +317,13 @@
 	};
 </script>
 
-<WeightPopoverCard id="logits" title={'Logits'} bind:isAnimationActive {timeline} bind:isOpen>
+	<WeightPopoverCard id="logits" title={'输出分数'} bind:isAnimationActive {timeline} bind:isOpen>
 	<div class="weight-popover-content flex items-center justify-start">
 		<div class="matrix flex flex-col items-center">
-			<div class="title flex items-center gap-1">
-				<span>Output<br />Embedding</span>
-				<HelpPopover id="hidden-states" 
-					>{`After passing through all blocks, \nthe final token's embedding vector \ncontains all the contextual information \nfrom the preceding tokens.`}</HelpPopover
+				<div class="title flex items-center gap-1">
+					<span>输出<br />嵌入</span>
+					<HelpPopover id="hidden-states" 
+						>{`经过所有块处理后，最后一个标记的嵌入向量\n包含了前面所有标记的上下文信息。`}</HelpPopover
 				>
 			</div>
 			<Matrix
@@ -340,10 +340,10 @@
 		</div>
 		<div class="operator"><div class="symbol mul pl-3">&times;</div></div>
 		<div class="matrix flex flex-col items-center">
-			<div class="title flex items-center gap-1">
-				Output Projection Weights
-				<HelpPopover id="lm-head-weights" 
-					>{`Transforms the final embedding into a vocabulary distribution.\nParameters were learned in training, fixed in prediction.`}</HelpPopover
+				<div class="title flex items-center gap-1">
+					输出投影权重
+					<HelpPopover id="lm-head-weights" 
+						>{`将最终嵌入转换为词汇分布。\n参数在训练中学习，预测时固定。`}</HelpPopover
 				>
 			</div>
 			<div class="flex gap-0">
@@ -364,9 +364,9 @@
 		</div>
 		<div class="operator"><div class="symbol plus">+</div></div>
 		<div class="matrix flex flex-col items-center">
-			<div class="title flex items-center gap-1">
-				Output Projection Bias<HelpPopover id="lm-head-bias" 
-					>{`Offsets added after the transformation.\nParameters were learned in training, fixed in prediction.`}</HelpPopover
+				<div class="title flex items-center gap-1">
+					输出投影偏置<HelpPopover id="lm-head-bias" 
+						>{`变换后添加的偏移量。\n参数在训练中学习，预测时固定。`}</HelpPopover
 				>
 			</div>
 			<Matrix
@@ -384,10 +384,10 @@
 		</div>
 		<div class="operator"><div class="symbol equal">=</div></div>
 		<div class="matrix flex flex-col items-center">
-			<div class="title flex items-center gap-1">
-				Logits
-				<HelpPopover id="logits" 
-					>{`Raw scores representing the model’s preference \nfor each vocabulary token before applying softmax.`}</HelpPopover
+				<div class="title flex items-center gap-1">
+					输出分数
+					<HelpPopover id="logits" 
+						>{`应用 softmax 前，表示模型对每个词汇标记偏好的原始分数。`}</HelpPopover
 				>
 			</div>
 			<div class="flex">

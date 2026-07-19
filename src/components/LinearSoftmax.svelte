@@ -211,7 +211,7 @@
 		data-click="prob-step-title"
 	>
 			<div class="title-text flex w-max items-center gap-1">
-				概率 (Probabilities)
+				概率
 				<ZoomInOutline></ZoomInOutline>
 		</div>
 	</div>
@@ -247,7 +247,7 @@
 			{#if isSoftmaxExpanded}
 				<div class="softmax-subtitle softmax-detail flex text-center text-xs opacity-0">
 					<div class="title-box token-string !justify-end">
-						<div class="title-text">Token</div>
+							<div class="title-text">标记</div>
 					</div>
 					<div class="title-box logits">
 						<div

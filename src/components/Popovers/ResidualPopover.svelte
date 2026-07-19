@@ -12,7 +12,7 @@
 
 <CommonPopover
 		className="residual-popover"
-		title="残差连接 (Residual Connection)"
+		title="残差连接"
 		{offset}
 		{triggeredBy}
 		{trigger}

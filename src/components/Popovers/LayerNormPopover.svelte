@@ -11,7 +11,7 @@
 
 <CommonPopover
 		className="ln-popover"
-		title="层归一化 (Layer Normalization)"
+		title="层归一化"
 		{offset}
 		{triggeredBy}
 		{trigger}

@@ -29,25 +29,25 @@
 		class="softmax-popover-title rounded-t-md border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700"
 	>
 			<h3 class="font-semibold text-gray-900">
-				选择 "<span class="highlight">{selected?.token}"</span> token 的概率
+					选择 "<span class="highlight">{selected?.token}"</span> 标记的概率
 		</h3>
 	</div>
 	<div class="softmax-popover-content">
 		<div class="formula-steps">
 			<div class="formula-step scaled">
 					<TextbookTooltip id="temperature">
-						<div class="step-title">缩放后 Logit</div></TextbookTooltip
+							<div class="step-title">缩放后分数</div></TextbookTooltip
 				>
 				<div class="step-content">
 					<div class="fraction">
 						<div class="frac-top relative">
-							<span class="annotation logit"><span>logit</span><Arrow size={16} /></span>
+								<span class="annotation logit"><span>分数</span><Arrow size={16} /></span>
 							<span class="highlight number">{getStringNumber(selected.logit)}</span>
 						</div>
 						<div class="frac-line"></div>
 						<div class="frac-bottom relative">
 							<span class="number">{$temperature}</span>
-							<span class="annotation temp"> <Arrow size={16} /><span>temperature</span></span>
+								<span class="annotation temp"> <Arrow size={16} /><span>温度</span></span>
 						</div>
 					</div>
 				</div>
@@ -100,7 +100,7 @@
 							<div class="cases">
 								<div class="case-row">
 									<span class="condition text"
-										>如果 logit <Katex math={'\\in'} /> Top-{$sampling.value}
+										>如果分数 <Katex math={'\\in'} /> Top-{$sampling.value}
 									</span>
 									<span class="number" class:highlight={selected?.rank < $sampling.value}
 										>{getStringNumber(selected?.scaledLogit)}</span
@@ -182,7 +182,7 @@
 				</div>
 			{:else}
 				<div class="formula-step norm-step">
-					<div class="step-title">归一化 (Normalization)</div>
+					<div class="step-title">归一化</div>
 					<div class="step-content">
 						{#if selected?.cutoffIndex >= selected?.rank}
 							<div class="fraction">

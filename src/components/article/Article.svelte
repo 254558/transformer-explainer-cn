@@ -54,7 +54,7 @@
 		</p>
 		<ol>
 			<li>
-				<strong class="bold-purple">嵌入层 (Embedding)</strong>：文本输入被分割成更小的单元，称为 token（可以是词或子词）。这些 token 被转换为称为嵌入向量的数字向量，捕捉词语的语义含义。
+					<strong class="bold-purple">嵌入层</strong>：文本输入被分割成更小的单元，称为标记（可以是词或子词）。这些标记被转换为称为嵌入向量的数字向量，捕捉词语的语义含义。
 			</li>
 			<li>
 				<strong class="bold-purple">Transformer 块</strong> 是模型处理和转换输入数据的基本构建块。每个块包括：
@@ -63,50 +63,50 @@
 						<strong>注意力机制</strong>，Transformer 块的核心组件。它允许 token 与其他 token 通信，捕捉上下文信息和词之间的关系。
 					</li>
 					<li>
-						<strong>MLP（多层感知机）层</strong>，一个前馈网络，独立处理每个 token。注意力层的目标是在 token 之间路由信息，而 MLP 的目标是精炼每个 token 的表示。
+						<strong>多层感知机层</strong>，一个前馈网络，独立处理每个标记。注意力层的目标是在标记之间路由信息，而 MLP 的目标是精炼每个标记的表示。
 					</li>
 				</ul>
 			</li>
 			<li>
-				<strong class="bold-purple">输出概率 (Output Probabilities)</strong>：最后的线性层和 softmax 层将处理后的嵌入向量转换为概率，使模型能够预测序列中的下一个 token。
+				<strong class="bold-purple">输出概率</strong>：最后的线性层和 softmax 层将处理后的嵌入向量转换为概率，使模型能够预测序列中的下一个标记。
 			</li>
 		</ol>
 	</div>
 
 	<div class="article-section" id="embedding" data-click="article-embedding">
-		<h2>嵌入层 (Embedding)</h2>
+		<h2>嵌入层</h2>
 		<p>
-			假设你想用 Transformer 模型生成文本。你输入这样的提示：<code>"Data visualization empowers users to"</code>。这个输入需要被转换成模型能够理解和处理的格式。这就是嵌入的作用：它将文本转换为模型可以处理的数字表示。为了将提示转换为嵌入，我们需要：1）对输入进行分词，2）获取 token 嵌入，3）添加位置信息，4）将 token 和位置编码相加得到最终的嵌入。让我们看看每一步是如何完成的。
+				假设你想用 Transformer 模型生成文本。你输入这样的提示：<code>"Data visualization empowers users to"</code>。这个输入需要被转换成模型能够理解和处理的格式。这就是嵌入的作用：它将文本转换为模型可以处理的数字表示。为了将提示转换为嵌入，我们需要：1）对输入进行分词，2）获取标记嵌入，3）添加位置信息，4）将标记和位置编码相加得到最终的嵌入。让我们看看每一步是如何完成的。
 		</p>
 		<div class="figure">
 			<img src="./article_assets/embedding.png" width="65%" />
 		</div>
 		<div class="figure-caption">
-			图 <span class="attention">1</span>。展开嵌入层视图，展示输入提示如何转换为向量表示。该过程包括
-			<span class="fig-numbering">(1)</span> 分词、(2) Token 嵌入、(3) 位置编码和 (4) 最终嵌入。
+				图 <span class="attention">1</span>。展开嵌入层视图，展示输入提示如何转换为向量表示。该过程包括
+				<span class="fig-numbering">(1)</span> 分词、(2) 标记嵌入、(3) 位置编码和 (4) 最终嵌入。
 		</div>
 		<div class="article-subsection">
-			<h3>步骤 1：分词 (Tokenization)</h3>
+				<h3>步骤 1：分词</h3>
 			<p>
-				分词是将输入文本分解成更小、更易管理的片段（称为 token）的过程。这些 token 可以是词或子词。单词 <code>"Data"</code> 和 <code>"visualization"</code> 对应唯一的 token，而 <code>"empowers"</code> 被拆分成两个 token。完整的 token 词汇表在训练模型之前确定：GPT-2 的词汇表有 <code>50,257</code> 个唯一的 token。现在我们将输入文本分割成具有不同 ID 的 token，就可以从嵌入中获取它们的向量表示。
+					分词是将输入文本分解成更小、更易管理的片段（称为标记）的过程。这些标记可以是词或子词。单词 <code>"Data"</code> 和 <code>"visualization"</code> 对应唯一的标记，而 <code>"empowers"</code> 被拆分成两个标记。完整的标记词汇表在训练模型之前确定：GPT-2 的词汇表有 <code>50,257</code> 个唯一的标记。现在我们将输入文本分割成具有不同 ID 的标记，就可以从嵌入中获取它们的向量表示。
 			</p>
 		</div>
 		<div class="article-subsection" id="article-token-embedding">
-			<h3>步骤 2. Token 嵌入</h3>
+				<h3>步骤 2. 标记嵌入</h3>
 			<p>
-				GPT-2（小型）将词汇表中的每个 token 表示为一个 768 维的向量；向量的维度取决于模型。这些嵌入向量存储在一个形状为 <code>(50,257, 768)</code> 的矩阵中，包含约 3900 万个参数！这个庞大的矩阵使模型能够为每个 token 赋予语义含义，在语言中使用或含义相似的 token 在这个高维空间中位置接近，而不相似的 token 则相距较远。
+					GPT-2（小型）将词汇表中的每个标记表示为一个 768 维的向量；向量的维度取决于模型。这些嵌入向量存储在一个形状为 <code>(50,257, 768)</code> 的矩阵中，包含约 3900 万个参数！这个庞大的矩阵使模型能够为每个标记赋予语义含义，在语言中使用或含义相似的标记在这个高维空间中位置接近，而不相似的标记则相距较远。
 			</p>
 		</div>
 		<div class="article-subsection" id="article-positional-embedding">
 			<h3>步骤 3. 位置编码</h3>
 			<p>
-				嵌入层还会编码每个 token 在输入提示中位置的信息。不同模型使用不同的位置编码方法。GPT-2 从头开始训练自己的位置编码矩阵，将其直接集成到训练过程中。
+					嵌入层还会编码每个标记在输入提示中位置的信息。不同模型使用不同的位置编码方法。GPT-2 从头开始训练自己的位置编码矩阵，将其直接集成到训练过程中。
 			</p>
 		</div>
 		<div class="article-subsection">
 			<h3>步骤 4. 最终嵌入</h3>
 			<p>
-				最后，我们将 token 编码和位置编码相加，得到最终的嵌入表示。这种组合表示既捕捉了 token 的语义含义，也捕捉了它们在输入序列中的位置。
+					最后，我们将标记编码和位置编码相加，得到最终的嵌入表示。这种组合表示既捕捉了标记的语义含义，也捕捉了它们在输入序列中的位置。
 			</p>
 		</div>
 	</div>
@@ -115,14 +115,14 @@
 		<h2>Transformer 块</h2>
 
 		<p>
-			Transformer 处理的核心在于 Transformer 块，它包含多头自注意力和多层感知机层。大多数模型由多个这样的块顺序堆叠而成。token 表示从第一个块到最后一个块逐层演化，使模型能够建立对每个 token 的深入理解。这种分层方法导致输入的更高级别表示。我们正在查看的 GPT-2（小型）模型由 <code>12</code> 个这样的块组成。
+				Transformer 处理的核心在于 Transformer 块，它包含多头自注意力和多层感知机层。大多数模型由多个这样的块顺序堆叠而成。标记表示从第一个块到最后一个块逐层演化，使模型能够建立对每个标记的深入理解。这种分层方法导致输入的更高级别表示。我们正在查看的 GPT-2（小型）模型由 <code>12</code> 个这样的块组成。
 		</p>
 	</div>
 
 	<div class="article-section" id="self-attention" data-click="article-attention">
-		<h3>多头自注意力 (Multi-Head Self-Attention)</h3>
+			<h3>多头自注意力</h3>
 		<p>
-			自注意力机制使模型能够捕捉序列中 token 之间的关系，使每个 token 的表示受到其他 token 的影响。多个注意力头允许模型从不同角度考虑这些关系；例如，一个头可能捕捉短程语法联系，而另一个头追踪更广泛的语义上下文。在接下来的部分中，我们将逐步介绍多头自注意力是如何计算的。
+				自注意力机制使模型能够捕捉序列中标记之间的关系，使每个标记的表示受到其他标记的影响。多个注意力头允许模型从不同角度考虑这些关系；例如，一个头可能捕捉短程语法联系，而另一个头追踪更广泛的语义上下文。在接下来的部分中，我们将逐步介绍多头自注意力是如何计算的。
 		</p>
 		<div class="article-subsection-l2">
 			<h4>步骤 1：查询、键和值矩阵</h4>
@@ -143,25 +143,25 @@
 			</div>
 
 			<p>
-				每个 token 的嵌入向量被转换为三个向量：
-				<span class="q-color">查询 (Query / Q)</span>、
-				<span class="k-color">键 (Key / K)</span> 和
-				<span class="v-color">值 (Value / V)</span>。这些向量通过将输入嵌入矩阵与学习得到的
-				<span class="q-color">Q</span>、<span class="k-color">K</span> 和 <span class="v-color">V</span> 的权重矩阵相乘得到。这里有一个网页搜索的类比来帮助理解这些矩阵：
+					每个标记的嵌入向量被转换为三个向量：
+					<span class="q-color">查询</span>、
+					<span class="k-color">键</span> 和
+					<span class="v-color">值</span>。这些向量通过将输入嵌入矩阵与学习得到的
+					<span class="q-color">Q</span>、<span class="k-color">K</span> 和 <span class="v-color">V</span> 的权重矩阵相乘得到。这里有一个网页搜索的类比来帮助理解这些矩阵：
 			</p>
 			<ul>
 				<li>
-					<strong class="q-color font-medium">查询 (Query / Q)</strong> 就像你在搜索引擎栏中输入的搜索文本。这是你想要<em>"查找更多信息"</em>的 token。
+						<strong class="q-color font-medium">查询</strong> 就像你在搜索引擎栏中输入的搜索文本。这是你想要<em>"查找更多信息"</em>的标记。
 				</li>
 				<li>
-					<strong class="k-color font-medium">键 (Key / K)</strong> 就像搜索结果窗口中每个网页的标题。它代表查询可以关注的可能的 token。
+						<strong class="k-color font-medium">键</strong> 就像搜索结果窗口中每个网页的标题。它代表查询可以关注的可能的标记。
 				</li>
 				<li>
-					<strong class="v-color font-medium">值 (Value / V)</strong> 就像实际显示的网页内容。一旦我们将适当的搜索词（Query）与相关结果（Key）匹配，我们就想获取最相关页面的内容（Value）。
+						<strong class="v-color font-medium">值</strong> 就像实际显示的网页内容。一旦我们将适当的搜索词与相关结果匹配，我们就想获取最相关页面的内容。
 				</li>
 			</ul>
 			<p>
-				通过使用这些 QKV 值，模型可以计算注意力分数，决定在生成预测时每个 token 应该获得多少关注。
+					通过使用这些 QKV 值，模型可以计算注意力分数，决定在生成预测时每个标记应该获得多少关注。
 			</p>
 		</div>
 		<div class="article-subsection-l2">
@@ -185,26 +185,26 @@
 
 			<ul>
 				<li>
-					<strong>点积 (Dot Product)</strong>：<span class="q-color">查询</span> 和 <span class="k-color">键</span> 矩阵的点积确定<strong>注意力分数</strong>，产生一个反映所有输入 token 之间关系的方阵。
+						<strong>点积</strong>：<span class="q-color">查询</span> 和 <span class="k-color">键</span> 矩阵的点积确定<strong>注意力分数</strong>，产生一个反映所有输入标记之间关系的方阵。
 				</li>
 				<li>
-					<strong>缩放 · 掩码</strong>：注意力分数被缩放，并在注意力矩阵的上三角应用掩码以防止模型访问未来的 token，将这些值设置为负无穷。模型需要学会如何预测下一个 token，而不能"窥视"未来。
+						<strong>缩放 · 掩码</strong>：注意力分数被缩放，并在注意力矩阵的上三角应用掩码以防止模型访问未来的标记，将这些值设置为负无穷。模型需要学会如何预测下一个标记，而不能"窥视"未来。
 				</li>
 				<li>
-					<strong>Softmax · 丢弃</strong>：掩码和缩放后，注意力分数通过 softmax 操作转换为概率，然后可选地通过 dropout 进行正则化。矩阵的每一行之和为 1，表示每个 token 对左侧所有其他 token 的相关性。
+						<strong>Softmax · 丢弃</strong>：掩码和缩放后，注意力分数通过 softmax 操作转换为概率，然后可选地通过 dropout 进行正则化。矩阵的每一行之和为 1，表示每个标记对左侧所有其他标记的相关性。
 				</li>
 			</ul>
 		</div>
 		<div class="article-subsection-l2">
 			<h4>步骤 4：输出和拼接</h4>
 			<p>
-				模型使用掩码自注意力分数与 <span class="v-color">值</span> 矩阵相乘，得到自注意力机制的<span class="purple-color">最终输出</span>。GPT-2 有 <code>12</code> 个自注意力头，每个捕捉 token 之间的不同关系。这些头的输出被拼接起来并通过一个线性投影。
+				模型使用掩码自注意力分数与 <span class="v-color">值</span> 矩阵相乘，得到自注意力机制的<span class="purple-color">最终输出</span>。GPT-2 有 <code>12</code> 个自注意力头，每个捕捉标记之间的不同关系。这些头的输出被拼接起来并通过一个线性投影。
 			</p>
 		</div>
 	</div>
 
 	<div class="article-section" id="article-activation" data-click="article-mlp">
-		<h3>MLP：多层感知机</h3>
+			<h3>多层感知机</h3>
 
 		<div class="figure">
 			<img src="./article_assets/mlp.png" width="70%" align="middle" />
@@ -214,35 +214,35 @@
 		</div>
 
 		<p>
-			在多个自注意力头捕捉了输入 token 之间的多样化关系后，拼接的输出通过多层感知机（MLP）层以增强模型的表示能力。MLP 块由两个线性变换和一个中间的
+				在多个自注意力头捕捉了输入标记之间的多样化关系后，拼接的输出通过多层感知机（MLP）层以增强模型的表示能力。MLP 块由两个线性变换和一个中间的
 			<a href="https://en.wikipedia.org/wiki/Rectified_linear_unit#Gaussian-error_linear_unit_(GELU)">GELU</a> 激活函数组成。
 		</p>
 		<p>
-			第一个线性变换将输入的维度扩展四倍，从 <code>768</code> 到 <code>3072</code>。这个扩展步骤允许模型将 token 表示投影到更高维的空间，在那里它可以捕捉在原始维度中可能不可见的更丰富和更复杂的模式。
+				第一个线性变换将输入的维度扩展四倍，从 <code>768</code> 到 <code>3072</code>。这个扩展步骤允许模型将标记表示投影到更高维的空间，在那里它可以捕捉在原始维度中可能不可见的更丰富和更复杂的模式。
 		</p>
 		<p>
 			第二个线性变换然后将维度降低回原始大小 <code>768</code>。这个压缩步骤将表示带回可管理的大小，同时保留扩展步骤中引入的有用的非线性变换。
 		</p>
 		<p>
-			与跨 token 整合信息的自注意力机制不同，MLP 独立处理每个 token，简单地将每个 token 表示从一个空间映射到另一个空间，丰富了整体模型的能力。
+				与跨标记整合信息的自注意力机制不同，MLP 独立处理每个标记，简单地将每个标记表示从一个空间映射到另一个空间，丰富了整体模型的能力。
 		</p>
 	</div>
 
 	<div class="article-section" id="article-prob" data-click="article-prob">
 		<h2>输出概率</h2>
 		<p>
-			在输入通过所有 Transformer 块处理后，输出通过最后的线性层为 token 预测做准备。这一层将最终表示投影到 <code>50,257</code> 维空间，词汇表中的每个 token 都有一个对应的值，称为 <code>logit</code>。任何 token 都可能是下一个词，所以这个过程允许我们简单地根据 token 成为下一个词的可能性进行排序。然后我们应用 softmax 函数将 logits 转换为总和为 1 的概率分布。这将使我们能够根据可能性对下一个 token 进行采样。
+				在输入通过所有 Transformer 块处理后，输出通过最后的线性层为标记预测做准备。这一层将最终表示投影到 <code>50,257</code> 维空间，词汇表中的每个标记都有一个对应的值，称为 <code>logit</code>。任何标记都可能是下一个词，所以这个过程允许我们简单地根据标记成为下一个词的可能性进行排序。然后我们应用 softmax 函数将 logits 转换为总和为 1 的概率分布。这将使我们能够根据可能性对下一个标记进行采样。
 		</p>
 
 		<div class="figure py-5">
 			<img src="./article_assets/softmax.png" width="70%" />
 		</div>
 		<div class="figure-caption">
-			图 <span class="attention">5</span>。词汇表中的每个 token 根据模型的输出 logits 被赋予一个概率。这些概率决定了每个 token 成为序列中下一个词的可能性。
+				图 <span class="attention">5</span>。词汇表中的每个标记根据模型的输出 logits 被赋予一个概率。这些概率决定了每个标记成为序列中下一个词的可能性。
 		</div>
 
 		<p id="article-temperature" data-click="article-temperature">
-			最后一步是通过从这个分布中采样来生成下一个 token。<code>温度 (temperature)</code> 超参数在这个过程中起着关键作用。从数学上讲，这是一个非常简单的操作：模型输出的 logits 只需除以 <code>温度</code>：
+				最后一步是通过从这个分布中采样来生成下一个标记。<code>温度</code> 超参数在这个过程中起着关键作用。从数学上讲，这是一个非常简单的操作：模型输出的 logits 只需除以 <code>温度</code>：
 		</p>
 
 		<ul>
@@ -280,21 +280,21 @@
 			有几个辅助架构特性增强了 Transformer 模型的性能。虽然它们对模型的整体性能很重要，但对于理解架构的核心概念并不是那么关键。层归一化、丢弃和残差连接是 Transformer 模型中的关键组件，特别是在训练阶段。层归一化稳定训练过程，帮助模型更快收敛。丢弃通过随机停用神经元来防止过拟合。残差连接允许梯度直接通过网络流动，有助于防止梯度消失问题。
 		</p>
 		<div class="article-subsection" id="article-ln">
-			<h3>层归一化 (Layer Normalization)</h3>
+				<h3>层归一化</h3>
 
 			<p>
 				层归一化有助于稳定训练过程并改善收敛性。它通过对特征维度上的输入进行归一化，确保激活值的均值和方差保持一致。这种归一化有助于缓解内部协变量偏移相关的问题，使模型更有效地学习并减少对初始权重的敏感度。层归一化在每个 Transformer 块中应用两次：一次在自注意力机制之前，一次在 MLP 层之前。
 			</p>
 		</div>
 		<div class="article-subsection" id="article-dropout">
-			<h3>丢弃 (Dropout)</h3>
+				<h3>丢弃</h3>
 
 			<p>
 				丢弃是一种正则化技术，通过在训练期间随机将一部分模型权重设置为零来防止神经网络过拟合。这鼓励模型学习更鲁棒的特征，减少对特定神经元的依赖，帮助网络更好地泛化到新的、未见过的数据。在模型推理期间，丢弃被停用。这实质上意味着我们使用了训练好的子网络的集成，从而带来更好的模型性能。
 			</p>
 		</div>
 		<div class="article-subsection" id="article-residual">
-			<h3>残差连接 (Residual Connections)</h3>
+				<h3>残差连接</h3>
 
 			<p>
 				残差连接首次在 2015 年的 ResNet 模型中提出。这一架构创新通过使训练非常深的神经网络成为可能，彻底改变了深度学习。本质上，残差连接是跳过一个或多个层的捷径，将层的输入添加到其输出中。这有助于缓解梯度消失问题，使得训练具有多个堆叠 Transformer 块的深层网络更加容易。在 GPT-2 中，每个 Transformer 块内使用两次残差连接：一次在 MLP 之前，一次在 MLP 之后，确保梯度更容易流动，并且较早的层在反向传播期间获得足够的更新。
@@ -319,7 +319,7 @@
 				<strong>选择 top-k 和 top-p 采样方法</strong>来调整推理期间的采样行为。尝试不同的值，观察概率分布如何变化以及如何影响模型的预测。
 			</li>
 			<li>
-				<strong>与注意力图交互</strong>，观察模型如何关注输入序列中的不同 token。悬停在 token 上以高亮其注意力权重，探索模型如何捕捉上下文和词之间的关系。
+					<strong>与注意力图交互</strong>，观察模型如何关注输入序列中的不同标记。悬停在标记上以高亮其注意力权重，探索模型如何捕捉上下文和词之间的关系。
 			</li>
 		</ul>
 	</div>

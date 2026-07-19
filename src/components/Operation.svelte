@@ -55,7 +55,7 @@
 					/> -->
 					<path d="M0,50 Q0,0 24,0"></path>
 				</svg>
-				<div class="guide-text dropout-text">丢弃 (Dropout)</div>
+				<div class="guide-text dropout-text">丢弃</div>
 			</div>
 		{/if}
 	</div>
@@ -81,7 +81,7 @@
 					/> -->
 					<path d="M0,50 Q0,0 24,0"></path>
 				</svg>
-				<div class="guide-text ln-text">层归一化 (LayerNorm)</div>
+				<div class="guide-text ln-text">层归一化</div>
 			</div>
 		{/if}
 	</div>

@@ -11,7 +11,7 @@
 
 <CommonPopover
 		className="dropout-popover"
-		title="丢弃 (Dropout)"
+		title="丢弃"
 		{offset}
 		{triggeredBy}
 		{trigger}

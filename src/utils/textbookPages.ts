@@ -79,7 +79,7 @@ export const textPages: TextbookPage[] = [
 		id: 'transformer-architecture',
 		title: 'Transformer 架构',
 		content:
-			'<p>Transformer 由三个主要部分组成：</p><div class="numbered-list"><div class="numbered-item"><span class="number-circle">1</span><div class="item-content"><strong>嵌入层</strong> 将文本转换为数字。</div></div><div class="numbered-item"><span class="number-circle">2</span><div class="item-content"><strong>Transformer 块</strong> 通过自注意力机制混合信息，并用 MLP 进行精炼。</div></div><div class="numbered-item"><span class="number-circle">3</span><div class="item-content"><strong>概率输出</strong> 确定每个下一个 token 的可能性。</div></div></div>',
+			'<p>Transformer 由三个主要部分组成：</p><div class="numbered-list"><div class="numbered-item"><span class="number-circle">1</span><div class="item-content"><strong>嵌入层</strong> 将文本转换为数字。</div></div><div class="numbered-item"><span class="number-circle">2</span><div class="item-content"><strong>Transformer 块</strong> 通过自注意力机制混合信息，并用 MLP 进行精炼。</div></div><div class="numbered-item"><span class="number-circle">3</span><div class="item-content"><strong>概率输出</strong> 确定每个下一个标记的可能性。</div></div></div>',
 		on: () => {
 			const selectors = [
 				'.step.embedding',
@@ -103,7 +103,7 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'embedding',
-		title: '嵌入层 (Embedding)',
+			title: '嵌入层',
 		content: `<p>在 Transformer 处理文本之前，它首先将文本分解为小单元，并将每个单元表示为一个数字列表（向量）。这个过程称为<strong>嵌入</strong>，该术语既可以指这个过程，也可以指生成的向量本身。</p><p>在本工具中，每个向量显示为一个矩形，悬停在其上可以查看其大小。</p>`,
 		on: () => {
 			highlightElements(['.step.embedding .title']);
@@ -124,8 +124,8 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'token-embedding',
-		title: 'Token 嵌入',
-		content: `<p><strong>分词</strong> 将输入文本分割成 token——单词或单词片段等小单元。GPT-2（小型）有 50,257 个 token 的词汇表，每个都有唯一的 ID。</p><p>在<strong>token 嵌入</strong>步骤中，每个 token 从一个大型查找表中匹配到一个 768 维的向量。这些向量在训练过程中学习，以最佳方式表示每个 token 的含义。</p>`,
+			title: '标记嵌入',
+			content: `<p><strong>分词</strong> 将输入文本分割成标记——单词或单词片段等小单元。GPT-2（小型）有 50,257 个标记的词汇表，每个都有唯一的 ID。</p><p>在<strong>标记嵌入</strong>步骤中，每个标记从一个大型查找表中匹配到一个 768 维的向量。这些向量在训练过程中学习，以最佳方式表示每个标记的含义。</p>`,
 		on: function () {
 			const selectors = [
 				'.token-column .column.token-string',
@@ -156,7 +156,7 @@ export const textPages: TextbookPage[] = [
 	{
 		id: 'positional-encoding',
 		title: '位置编码',
-		content: `<p>词序在语言中非常重要。<strong>位置编码</strong> 为每个 token 提供其在序列中位置的信息。</p><p>GPT-2 通过向 token 的嵌入向量添加一个学习得到的位置嵌入来实现，但较新的模型可能使用其他方法，如 RoPE（旋转位置编码），它通过旋转某些向量来编码位置。所有方法的目的都是帮助模型理解文本中的顺序。</p>`,
+			content: `<p>词序在语言中非常重要。<strong>位置编码</strong> 为每个标记提供其在序列中位置的信息。</p><p>GPT-2 通过向标记的嵌入向量添加一个学习得到的位置嵌入来实现，但较新的模型可能使用其他方法，如 RoPE（旋转位置编码），它通过旋转某些向量来编码位置。所有方法的目的都是帮助模型理解文本中的顺序。</p>`,
 		on: function () {
 			const selectors = [
 				'.token-column .column.position-embedding',
@@ -187,7 +187,7 @@ export const textPages: TextbookPage[] = [
 	{
 		id: 'blocks',
 		title: '重复的 Transformer 块',
-		content: `<p><strong>Transformer 块</strong> 是模型中的主要处理单元。它包含两个部分：</p><ul><li><strong>多头自注意力</strong> – 让 token 之间共享信息</li><li><strong>MLP</strong> – 精炼每个 token 的细节</li></ul><p>模型堆叠多个这样的块，使得 token 表示在传递过程中越来越丰富。GPT-2（小型）有 12 个这样的块。</p>`,
+			content: `<p><strong>Transformer 块</strong> 是模型中的主要处理单元。它包含两个部分：</p><ul><li><strong>多头自注意力</strong> – 让标记之间共享信息</li><li><strong>MLP</strong> – 精炼每个标记的细节</li></ul><p>模型堆叠多个这样的块，使得标记表示在传递过程中越来越丰富。GPT-2（小型）有 12 个这样的块。</p>`,
 		on: function () {
 			this.timeoutId = setTimeout(
 				() => {
@@ -232,7 +232,7 @@ export const textPages: TextbookPage[] = [
 		id: 'self-attention',
 		title: '多头自注意力',
 		content:
-			'<p><strong>自注意力</strong> 让模型决定输入的哪些部分与每个 token 最相关。这有助于捕捉含义和关系，即使是相距很远的词之间也能建立联系。</p><p>在<strong>多头</strong>形式中，模型并行运行多个注意力过程，每个过程关注文本中不同的模式。</p>',
+			'<p><strong>自注意力</strong> 让模型决定输入的哪些部分与每个标记最相关。这有助于捕捉含义和关系，即使是相距很远的词之间也能建立联系。</p><p>在<strong>多头</strong>形式中，模型并行运行多个注意力过程，每个过程关注文本中不同的模式。</p>',
 		on: () => {
 			highlightElements(['.step.attention']);
 		},
@@ -242,16 +242,16 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'qkv',
-		title: '查询、键、值 (QKV)',
+			title: '查询、键、值',
 		content: `
-		<p>为了执行自注意力，每个 token 的嵌入向量被转换为
-	  <span class="highlight">三种新的嵌入向量</span>——
-	  <span class="blue">查询 (Query)</span>,
-	  <span class="red">键 (Key)</span> 和
-	  <span class="green">值 (Value)</span>。
-	  这个转换通过对每个 token 嵌入应用不同的权重和偏置来实现。这些参数（权重和偏置）通过训练进行优化。</p>
-
-	<p>生成之后，<span class="blue">查询</span> 与 <span class="red">键</span> 进行比较以衡量相关性，然后使用这个相关性对 <span class="green">值</span> 进行加权。</p>
+			<p>为了执行自注意力，每个标记的嵌入向量被转换为
+		  <span class="highlight">三种新的嵌入向量</span>——
+		  <span class="blue">查询</span>,
+		  <span class="red">键</span> 和
+		  <span class="green">值</span>。
+		  这个转换通过对每个标记嵌入应用不同的权重和偏置来实现。这些参数（权重和偏置）通过训练进行优化。</p>
+	
+		<p>生成之后，<span class="blue">查询</span> 与 <span class="red">键</span> 进行比较以衡量相关性，然后使用这个相关性对 <span class="green">值</span> 进行加权。</p>
 	`,
 		on: function () {
 			this.timeoutId = setTimeout(
@@ -308,7 +308,7 @@ export const textPages: TextbookPage[] = [
 	{
 		id: 'masked-self-attention',
 		title: '掩码自注意力',
-		content: `<p>在每个头中，模型决定每个 token 对其他 token 的关注程度：</p><ul><li><strong>点积</strong> – 将 <span class="blue">查询</span>/<span class="red">键</span> 向量中对应的数字相乘并求和，得到 <span class="purple">注意力分数</span>。</li><li><strong>掩码</strong> – 隐藏未来的 token，使其无法提前偷看。</li><li><strong>Softmax</strong> – 将分数转换为概率，每行之和为 1，显示对前面 token 的关注程度。</li></ul>`,
+			content: `<p>在每个头中，模型决定每个标记对其他标记的关注程度：</p><ul><li><strong>点积</strong> – 将 <span class="blue">查询</span>/<span class="red">键</span> 向量中对应的数字相乘并求和，得到 <span class="purple">注意力分数</span>。</li><li><strong>掩码</strong> – 隐藏未来的标记，使其无法提前偷看。</li><li><strong>Softmax</strong> – 将分数转换为概率，每行之和为 1，显示对前面标记的关注程度。</li></ul>`,
 		on: () => {
 			highlightAttentionPath();
 			highlightElements(['.attention-matrix.attention-result']);
@@ -333,7 +333,7 @@ export const textPages: TextbookPage[] = [
 		id: 'output-concatenation',
 		title: '注意力输出与拼接',
 		content:
-			'<p>每个头将它的<span class="purple">注意力分数</span>与<span class="green">值</span>嵌入向量<span class="highlight">相乘，生成注意力输出</span>——这是在考虑上下文后每个 token 的精炼表示。</p><p>GPT-2（小型）有 12 个这样的输出，它们被拼接起来形成一个原始大小的向量（768 个数字）。</p>',
+			'<p>每个头将它的<span class="purple">注意力分数</span>与<span class="green">值</span>嵌入向量<span class="highlight">相乘，生成注意力输出</span>——这是在考虑上下文后每个标记的精炼表示。</p><p>GPT-2（小型）有 12 个这样的输出，它们被拼接起来形成一个原始大小的向量（768 个数字）。</p>',
 		on: function () {
 			this.timeoutId = setTimeout(
 				() => {
@@ -363,9 +363,9 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'mlp',
-		title: 'MLP（多层感知机）',
-		content:
-			'<p>注意力输出通过<strong>MLP</strong>来进一步精炼 token 表示。线性层使用学习得到的权重和偏置改变嵌入向量的值和大小，然后通过非线性激活函数决定每个值通过多少。</p><p>存在多种激活函数；GPT-2 使用<strong>GELU</strong>，它允许小值部分通过、大值全部通过，有助于捕捉微妙和强烈的模式。</p>',
+			title: '多层感知机',
+			content:
+				'<p>注意力输出通过<strong>MLP</strong>来进一步精炼标记表示。线性层使用学习得到的权重和偏置改变嵌入向量的值和大小，然后通过非线性激活函数决定每个值通过多少。</p><p>存在多种激活函数；GPT-2 使用<strong>GELU</strong>，它允许小值部分通过、大值全部通过，有助于捕捉微妙和强烈的模式。</p>',
 		on: () => {
 			highlightElements(['.step.mlp', '.operation-col.activation']);
 		},
@@ -377,7 +377,7 @@ export const textPages: TextbookPage[] = [
 	{
 		id: 'output-logit',
 		title: '输出 Logit',
-		content: `<p>经过所有 Transformer 块之后，最后一个 token 的输出嵌入向量（已包含之前所有 token 的上下文信息）与最后一层学习得到的权重相乘。</p><p>这产生了<strong>logits</strong>——50,257 个数字，每个对应 GPT-2 词汇表中的一个 token，表示每个 token 作为下一个词出现的可能性。</p>`,
+			content: `<p>经过所有 Transformer 块之后，最后一个标记的输出嵌入向量（已包含之前所有标记的上下文信息）与最后一层学习得到的权重相乘。</p><p>这产生了<strong>logits</strong>——50,257 个数字，每个对应 GPT-2 词汇表中的一个标记，表示每个标记作为下一个词出现的可能性。</p>`,
 		on: () => {
 			highlightElements(['g.path-group.softmax', '.column.final']);
 		},
@@ -400,7 +400,7 @@ export const textPages: TextbookPage[] = [
 		id: 'output-probabilities',
 		title: '概率输出',
 		content:
-			'<p>Logits 只是原始分数。为了便于解释，我们将它们转换为 0 到 1 之间的<strong>概率</strong>，所有概率之和为 1。这告诉我们每个 token 成为下一个词的可能性。</p><p>我们并不总是选择概率最高的 token，而是可以使用不同的选择策略来平衡生成文本的安全性和创造性。</p>',
+			'<p>Logits 只是原始分数。为了便于解释，我们将它们转换为 0 到 1 之间的<strong>概率</strong>，所有概率之和为 1。这告诉我们每个标记成为下一个词的可能性。</p><p>我们并不总是选择概率最高的标记，而是可以使用不同的选择策略来平衡生成文本的安全性和创造性。</p>',
 		on: () => {
 			highlightElements(['.step.softmax .title']);
 		},
@@ -420,9 +420,9 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'temperature',
-		title: '温度 (Temperature)',
+			title: '温度',
 		content:
-			'<p><strong>温度</strong> 通过在转换为概率之前缩放 logits 来起作用。<strong>低温度</strong>（如 0.2）使大的 logits 更大、小的更小，偏向得分最高的 token，导致更<strong>可预测的选择</strong>。<strong>高温度</strong>（如 1.0 或以上）则缩小差异，使不太可能出现的 token 更具竞争力，从而产生更<strong>有创意的输出</strong>。</p>',
+			'<p><strong>温度</strong> 通过在转换为概率之前缩放 logits 来起作用。<strong>低温度</strong>（如 0.2）使大的 logits 更大、小的更小，偏向得分最高的标记，导致更<strong>可预测的选择</strong>。<strong>高温度</strong>（如 1.0 或以上）则缩小差异，使不太可能出现的标记更具竞争力，从而产生更<strong>有创意的输出</strong>。</p>',
 		on: function () {
 			if (get(expandedBlock).id !== 'softmax') {
 				expandedBlock.set({ id: 'softmax' });
@@ -472,7 +472,7 @@ export const textPages: TextbookPage[] = [
 		id: 'sampling',
 		title: '采样策略',
 		content:
-			'<p>最后，我们需要一个策略来选择下一个 token。有多种方法，以下是常见的几种：贪心搜索选择概率最高的一个。<strong>Top-k</strong> 只保留 k 个最可能的 token，而 <strong>top-p</strong> 保留累计概率至少为 p 的最小集合——提前剔除不太可能的 token。</p><p>然后 softmax 将剩余的 logits 转换为概率，再从允许的集合中随机选择一个 token。</p>',
+			'<p>最后，我们需要一个策略来选择下一个标记。有多种方法，以下是常见的几种：贪心搜索选择概率最高的一个。<strong>Top-k</strong> 只保留 k 个最可能的标记，而 <strong>top-p</strong> 保留累计概率至少为 p 的最小集合——提前剔除不太可能的标记。</p><p>然后 softmax 将剩余的 logits 转换为概率，再从允许的集合中随机选择一个标记。</p>',
 		on: function () {
 			if (get(expandedBlock).id !== 'softmax') {
 				expandedBlock.set({ id: 'softmax' });
@@ -553,7 +553,7 @@ export const textPages: TextbookPage[] = [
 	},
 	{
 		id: 'dropout',
-		title: '丢弃 (Dropout)',
+			title: '丢弃',
 		content: `<p>在训练过程中，<strong>丢弃</strong> 会随机关闭一些连接，防止模型过度拟合特定模式。这有助于模型学习更具泛化能力的特征。GPT-2 使用了丢弃，但较新的 LLM 通常省略它，因为它们在超大规模数据集上训练，过拟合问题不那么严重。在推理时，丢弃会被关闭。</p>`,
 		on: () => {
 			highlightElements(['.operation-col.dropout']);
